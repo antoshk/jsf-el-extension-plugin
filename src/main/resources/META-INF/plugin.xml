@@ -16,6 +16,8 @@
     It's a basic functionality. You are free to improve it by pull requests.
     ]]></description>
 
+    <idea-version since-build="171"/>
+
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
          on how to target different products -->
     <!-- uncomment to enable plugin in all products
