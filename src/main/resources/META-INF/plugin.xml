@@ -1,0 +1,33 @@
+<idea-plugin>
+    <id>com.antoshk.jsf-el-extension-plugin</id>
+    <name>JSF-EL-extension</name>
+    <vendor email="anton.shelkovich@gmail.com">Anton Shelkovich</vendor>
+
+    <description><![CDATA[
+    Allows to see autocompletion for enums in JSF EL.<br>
+    By default enums are not supported by JSF EL, but it's possible to use them with extension libraries like PrimeFaces.
+    Even in that case there is no autocompletion support for enum names and constants. This plugin adds this support.<br>
+    To use it you have to create enumPlugin.properties file somewhere in project and put there enum descriptions
+    in format: enumName = enum.full.class.Name<br>
+    Typing enumName will trigger autocompletion of enum name and enum.full.class.Name will allow to find enum constants.
+    <br><br>
+    Also if enum constants contain constructor arguments (usually used for description) they will be shown in
+    suggestion description.
+    It's a basic functionality. You are free to improve it by pull requests.
+    ]]></description>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <!-- uncomment to enable plugin in all products
+    <depends>com.intellij.modules.lang</depends>
+    -->
+
+    <extensions defaultExtensionNs="com.intellij">
+        <completion.contributor language="XHTML" implementationClass="com.antoshk.ElCompletionContributor"/>
+        <completion.confidence language="XHTML" implementationClass="com.antoshk.ElCompletionConfidence"
+                               order="first"/>
+    </extensions>
+
+    <actions>
+    </actions>
+</idea-plugin>
