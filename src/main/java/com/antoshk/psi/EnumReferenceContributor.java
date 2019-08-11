@@ -1,6 +1,7 @@
 package com.antoshk.psi;
 
 import com.antoshk.ELUtils;
+import com.antoshk.EnumUtils;
 import com.intellij.codeInsight.completion.CompletionUtilCore;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.patterns.PlatformPatterns;
@@ -36,8 +37,11 @@ public class EnumReferenceContributor extends PsiReferenceContributor {
                             
                             Map<ELUtils.Parts, String> enumNameParts = ELUtils.processElTree(element, value);
                             if (enumNameParts.get(ELUtils.Parts.ENUM_NAME) != null && enumNameParts.get(ELUtils.Parts.CONST_NAME) != null) {
-                                return new PsiReference[]{
-                                    new EnumConstantReference(element, textRange, enumNameParts.get(ELUtils.Parts.ENUM_NAME))};
+                                if (EnumUtils.isEnum(enumNameParts.get(ELUtils.Parts.ENUM_NAME), element.getProject())) {
+                                    return new PsiReference[]{
+                                        new EnumConstantReference(element, textRange, enumNameParts.get(ELUtils.Parts.ENUM_NAME))
+                                    };
+                                }
                             } else if (enumNameParts.get(ELUtils.Parts.ENUM_NAME) != null) {
                                 return new PsiReference[]{new EnumReference(element, textRange)};
                             }
