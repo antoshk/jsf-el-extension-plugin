@@ -14,7 +14,7 @@ public class Utils {
     
     public static String createArgList(PsiEnumConstant enumConstant) {
         PsiExpressionList argumentList = enumConstant.getArgumentList();
-        if (argumentList != null && !argumentList.isEmpty()) {
+        if (argumentList != null) {
             List<String> args = Stream.of(argumentList).map(PsiElement::getText).collect(Collectors.toList());
             return String.join(",", args);
         }

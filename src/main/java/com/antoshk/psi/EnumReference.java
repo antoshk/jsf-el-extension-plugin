@@ -5,7 +5,6 @@ import com.antoshk.PropertyParser;
 import com.antoshk.Utils;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
-import com.intellij.model.SymbolResolveResult;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
@@ -14,7 +13,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -47,12 +45,6 @@ public class EnumReference extends PsiReferenceBase<PsiElement> {
             }
         }
         return variants.toArray();
-    }
-    
-    @NotNull
-    @Override
-    public Collection<? extends SymbolResolveResult> resolveReference() {
-        return null;
     }
     
 }
