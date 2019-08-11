@@ -16,7 +16,18 @@
     It's a basic functionality. You are free to improve it by pull requests.
     ]]></description>
 
-    <idea-version since-build="171"/>
+    <change-notes><![CDATA[
+    <ul>
+        <li>Refactoring project to use Property plugin</li>
+        <li>Refactoring project to use Reference Contributor instead of Completion Contributor</li>
+        <li>Variables now have references to their classes and completion suggestions contains not only enum constants but everything connected to particular enum</li>
+        <li>Performance improved</li>
+        <li>Fixed bug with getting current project</li>
+    </ul>
+    ]]>
+    </change-notes>
+
+    <idea-version since-build="192"/>
 
     <depends>com.intellij.modules.java</depends>
     <depends>com.intellij.properties</depends>
