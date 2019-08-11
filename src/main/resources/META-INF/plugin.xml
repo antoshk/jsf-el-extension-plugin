@@ -27,7 +27,7 @@
     ]]>
     </change-notes>
 
-    <idea-version since-build="171" until-build="183.*"/>
+    <idea-version since-build="181" until-build="183.*"/>
 
     <depends>com.intellij.properties</depends>
     <depends>com.intellij.modules.ultimate</depends>
