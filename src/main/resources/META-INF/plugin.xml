@@ -19,18 +19,11 @@
     <idea-version since-build="171"/>
 
     <depends>com.intellij.modules.java</depends>
+    <depends>com.intellij.properties</depends>
     <depends>com.intellij.modules.ultimate</depends>
 
-    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
-         on how to target different products -->
-    <!-- uncomment to enable plugin in all products
-    <depends>com.intellij.modules.lang</depends>
-    -->
-
     <extensions defaultExtensionNs="com.intellij">
-        <completion.contributor language="EL" implementationClass="com.antoshk.ElCompletionContributor" order="first"/>
-        <completion.confidence language="EL" implementationClass="com.antoshk.ElCompletionConfidence"
-                               order="first"/>
+        <psi.referenceContributor implementation="com.antoshk.psi.EnumReferenceContributor"/>
     </extensions>
 
     <actions>
