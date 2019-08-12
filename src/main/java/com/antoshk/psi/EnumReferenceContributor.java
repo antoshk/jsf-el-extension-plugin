@@ -5,7 +5,9 @@ import com.antoshk.EnumUtils;
 import com.intellij.codeInsight.completion.CompletionUtilCore;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.patterns.PlatformPatterns;
+import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiEnumConstant;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.PsiReferenceContributor;
 import com.intellij.psi.PsiReferenceProvider;
@@ -37,13 +39,18 @@ public class EnumReferenceContributor extends PsiReferenceContributor {
                             
                             Map<ELUtils.Parts, String> enumNameParts = ELUtils.processElTree(element, value);
                             if (enumNameParts.get(ELUtils.Parts.ENUM_NAME) != null && enumNameParts.get(ELUtils.Parts.CONST_NAME) != null) {
-                                if (EnumUtils.isEnum(enumNameParts.get(ELUtils.Parts.ENUM_NAME), element.getProject())) {
+                                PsiEnumConstant constant = EnumUtils.findEnumConstant(enumNameParts.get(ELUtils.Parts.ENUM_NAME),
+                                    enumNameParts.get(ELUtils.Parts.CONST_NAME), element.getProject());
+                                if (constant != null) {
                                     return new PsiReference[]{
-                                        new EnumConstantReference(element, textRange, enumNameParts.get(ELUtils.Parts.ENUM_NAME))
+                                        new EnumConstantReference(element, textRange, constant)
                                     };
                                 }
                             } else if (enumNameParts.get(ELUtils.Parts.ENUM_NAME) != null) {
-                                return new PsiReference[]{new EnumReference(element, textRange)};
+                                PsiClass enumClass = EnumUtils.findEnum(enumNameParts.get(ELUtils.Parts.ENUM_NAME), element.getProject());
+                                if (enumClass != null) {
+                                    return new PsiReference[]{new EnumReference(element, textRange, enumClass)};
+                                }
                             }
 
 //                            if (value.startsWith("Kl")) {

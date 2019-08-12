@@ -18,11 +18,8 @@
 
     <change-notes><![CDATA[
     <ul>
-        <li>Refactoring project to use Property plugin</li>
-        <li>Refactoring project to use Reference Contributor instead of Completion Contributor</li>
-        <li>Variables now have references to their classes and completion suggestions contains not only enum constants but everything connected to particular enum</li>
-        <li>Performance improved</li>
-        <li>Fixed bug with getting current project</li>
+        <li>Now used both: ReferenceContributor and CompletionContributor, each one for their own functionality</li>
+        <li>Fixed bugs, when plugin made references from wrong objects</li>
     </ul>
     ]]>
     </change-notes>
@@ -35,8 +32,7 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <psi.referenceContributor implementation="com.antoshk.psi.EnumReferenceContributor"/>
-<!--        <completion.contributor language="EL" implementationClass="com.antoshk.ElCompletionContributor" order="first"/>-->
-<!--        <completion.confidence language="EL" implementationClass="com.antoshk.ElCompletionConfidence" order="first"/>-->
+        <completion.contributor language="EL" implementationClass="com.antoshk.ElCompletionContributor" order="first"/>
     </extensions>
 
     <actions>
