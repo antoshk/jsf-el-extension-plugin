@@ -65,11 +65,11 @@ public class EnumUtils {
         return null;
     }
     
-    public static boolean isEnum(String enumName, Project project){
+    public static boolean isEnum(String enumName, Project project) {
         return getEnumFullClassName(enumName, project) != null;
     }
     
-    public static boolean isEnumConstant(String enumName, String constantName, Project project){
+    public static boolean isEnumConstant(String enumName, String constantName, Project project) {
         return getEnumFullClassName(enumName, project) != null;
     }
     

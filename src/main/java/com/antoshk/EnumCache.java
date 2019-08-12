@@ -13,17 +13,17 @@ public class EnumCache {
     private EnumCache() {}
     
     public static EnumCache getInstance() {
-        if (enumCache == null){
+        if (enumCache == null) {
             enumCache = new EnumCache();
         }
         return enumCache;
     }
     
-    public void updateCache(Project project, Map<String, String> enums){
+    public void updateCache(Project project, Map<String, String> enums) {
         cache.put(project, enums);
     }
     
-    public Map<String, String> getEnums(Project project){
+    public Map<String, String> getEnums(Project project) {
         return cache.get(project);
     }
     

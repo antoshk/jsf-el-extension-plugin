@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class EnumConstantReference extends PsiReferenceBase<PsiElement> {
-
+    
     PsiEnumConstant constant;
     
     public EnumConstantReference(@NotNull PsiElement element, TextRange textRange, PsiEnumConstant constant) {

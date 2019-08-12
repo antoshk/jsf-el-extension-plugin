@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Optional;
 
 public class ELUtils {
+    
     public static final String EL_VARIABLE = "ELVariableImpl";
     public static final String EL_EXPRESSION_HOLDER = "ELExpressionHolder";
     
@@ -30,4 +31,5 @@ public class ELUtils {
     public enum Parts {
         ENUM_NAME, CONST_NAME;
     }
+    
 }
