@@ -1,6 +1,5 @@
 package com.antoshk.psi;
 
-import com.intellij.model.SymbolResolveResult;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
@@ -9,7 +8,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 public class EnumReference extends PsiReferenceBase<PsiElement> {
     
@@ -30,12 +28,6 @@ public class EnumReference extends PsiReferenceBase<PsiElement> {
     @Override
     public Object[] getVariants() {
         return new ArrayList<>().toArray();
-    }
-    
-    @NotNull
-    @Override
-    public Collection<? extends SymbolResolveResult> resolveReference() {
-        return null;
     }
     
 }
