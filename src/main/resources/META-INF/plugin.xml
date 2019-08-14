@@ -19,7 +19,7 @@
     <change-notes><![CDATA[
     <ul>
         <li>Annotations added. Although enums and their constants still marked like unresolved variables by bundled JSF plugin, now valid
-        enums shown underlined, valid constants additionally marked like constant and invalid ones underlined like something invalid</li>
+        enums shown cursive, valid constants additionally marked like constant and invalid ones underlined like something invalid</li>
     </ul>
     ]]>
     </change-notes>
