@@ -28,7 +28,7 @@ public class EnumAnnotator implements Annotator {
                     PsiClass enumClass = EnumUtils.findEnum(enumNameParts.get(ELUtils.Parts.ENUM_NAME), element.getProject());
                     if(enumClass != null) {
                         Annotation annotation = holder.createInfoAnnotation(element.getPrevSibling().getPrevSibling(), null);
-                        annotation.setTextAttributes(DefaultLanguageHighlighterColors.REASSIGNED_LOCAL_VARIABLE);
+                        annotation.setTextAttributes(DefaultLanguageHighlighterColors.GLOBAL_VARIABLE);
                         PsiEnumConstant constant = EnumUtils.findEnumConstant(enumClass, enumNameParts.get(ELUtils.Parts.CONST_NAME));
                         if (constant != null) {
                             annotation = holder.createInfoAnnotation(element, null);
@@ -41,7 +41,7 @@ public class EnumAnnotator implements Annotator {
                     PsiClass enumClass = EnumUtils.findEnum(enumNameParts.get(ELUtils.Parts.ENUM_NAME), element.getProject());
                     if (enumClass != null) {
                         Annotation annotation = holder.createInfoAnnotation(element, null);
-                        annotation.setTextAttributes(DefaultLanguageHighlighterColors.REASSIGNED_LOCAL_VARIABLE);
+                        annotation.setTextAttributes(DefaultLanguageHighlighterColors.STATIC_METHOD);
                     }
                 }
             }
