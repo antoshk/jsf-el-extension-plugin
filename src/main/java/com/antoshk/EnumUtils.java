@@ -52,6 +52,10 @@ public class EnumUtils {
     
     public static PsiEnumConstant findEnumConstant(String enumName, String enumConstantName, Project project) {
         PsiClass enumClass = findEnum(enumName, project);
+        return findEnumConstant(enumClass, enumConstantName);
+    }
+    
+    public static PsiEnumConstant findEnumConstant(PsiClass enumClass, String enumConstantName) {
         if (enumClass != null) {
             if (enumClass instanceof PsiCompiledElement) {
                 enumClass = (PsiClass) ((PsiCompiledElement) enumClass).getMirror(); // triggers decompilation
