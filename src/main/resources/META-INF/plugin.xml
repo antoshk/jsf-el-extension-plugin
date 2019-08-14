@@ -18,8 +18,8 @@
 
     <change-notes><![CDATA[
     <ul>
-        <li>Now used both: ReferenceContributor and CompletionContributor, each one for their own functionality</li>
-        <li>Fixed bugs, when plugin made references from wrong objects</li>
+        <li>Annotations added. Although enums and their constants still marked like unresolved variables by bundled JSF plugin, now valid
+        enums shown underlined, valid constants additionally marked like constant and invalid ones underlined like something invalid</li>
     </ul>
     ]]>
     </change-notes>
@@ -33,6 +33,7 @@
     <extensions defaultExtensionNs="com.intellij">
         <psi.referenceContributor implementation="com.antoshk.psi.EnumReferenceContributor"/>
         <completion.contributor language="EL" implementationClass="com.antoshk.ElCompletionContributor" order="first"/>
+        <annotator language="EL" implementationClass="com.antoshk.EnumAnnotator" order="last"/>
     </extensions>
 
     <actions>
