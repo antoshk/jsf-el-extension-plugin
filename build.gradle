@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'com.antoshk'
-version '0.1.3.2'
+version '0.2.2'
 
 
 sourceCompatibility = 1.8
@@ -22,7 +22,7 @@ dependencies {
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
-    version 'IU-2018.1'
+    version 'IU-2019.2'
     updateSinceUntilBuild false
-    plugins = ['properties']
+    plugins = ['java','properties']
 }
