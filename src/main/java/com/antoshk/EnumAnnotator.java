@@ -24,7 +24,7 @@ public class EnumAnnotator implements Annotator {
                     value = value.substring(0, value.indexOf(CompletionUtilCore.DUMMY_IDENTIFIER_TRIMMED));
                 }
                 Map<ELUtils.Parts, String> enumNameParts = ELUtils.processElTree(element, value);
-                if (enumNameParts.get(ELUtils.Parts.ENUM_NAME) != null && enumNameParts.get(ELUtils.Parts.CONST_NAME) != null) {
+                if (enumNameParts.size() == 2) {
                     PsiClass enumClass = EnumUtils.findEnum(enumNameParts.get(ELUtils.Parts.ENUM_NAME), element.getProject());
                     if(enumClass != null) {
                         Annotation annotation = holder.createInfoAnnotation(element.getPrevSibling().getPrevSibling(), null);
@@ -33,11 +33,12 @@ public class EnumAnnotator implements Annotator {
                         if (constant != null) {
                             annotation = holder.createInfoAnnotation(element, null);
                             annotation.setTextAttributes(DefaultLanguageHighlighterColors.CONSTANT);
+                            annotation.setTooltip(Utils.createArgList(constant));
                         } else {
                             holder.createErrorAnnotation(element, "Unresolved enum constant name");
                         }
                     }
-                } else if (enumNameParts.get(ELUtils.Parts.ENUM_NAME) != null) {
+                } else if (enumNameParts.size() == 1) {
                     PsiClass enumClass = EnumUtils.findEnum(enumNameParts.get(ELUtils.Parts.ENUM_NAME), element.getProject());
                     if (enumClass != null) {
                         Annotation annotation = holder.createInfoAnnotation(element, null);

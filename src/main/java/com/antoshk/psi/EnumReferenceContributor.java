@@ -38,7 +38,7 @@ public class EnumReferenceContributor extends PsiReferenceContributor {
                             }
                             
                             Map<ELUtils.Parts, String> enumNameParts = ELUtils.processElTree(element, value);
-                            if (enumNameParts.get(ELUtils.Parts.ENUM_NAME) != null && enumNameParts.get(ELUtils.Parts.CONST_NAME) != null) {
+                            if (enumNameParts.size() == 2) {
                                 PsiEnumConstant constant = EnumUtils.findEnumConstant(enumNameParts.get(ELUtils.Parts.ENUM_NAME),
                                     enumNameParts.get(ELUtils.Parts.CONST_NAME), element.getProject());
                                 if (constant != null) {
@@ -46,22 +46,12 @@ public class EnumReferenceContributor extends PsiReferenceContributor {
                                         new EnumConstantReference(element, textRange, constant)
                                     };
                                 }
-                            } else if (enumNameParts.get(ELUtils.Parts.ENUM_NAME) != null) {
+                            } else if (enumNameParts.size() == 1) {
                                 PsiClass enumClass = EnumUtils.findEnum(enumNameParts.get(ELUtils.Parts.ENUM_NAME), element.getProject());
                                 if (enumClass != null) {
                                     return new PsiReference[]{new EnumReference(element, textRange, enumClass)};
                                 }
                             }
-
-//                            if (value.startsWith("Kl")) {
-//                                return new PsiReference[]{new EnumReference(element, textRange)};
-//                            } else if (
-//                                element.getPrevSibling() != null &&
-//                                    element.getPrevSibling().getPrevSibling() != null &&
-//                                    element.getPrevSibling().getPrevSibling().getText().startsWith("Kl")) {
-//                                return new PsiReference[]{
-//                                    new EnumConstantReference(element, textRange, element.getPrevSibling().getPrevSibling().getText())};
-//                            }
                         }
                     }
                     return PsiReference.EMPTY_ARRAY;

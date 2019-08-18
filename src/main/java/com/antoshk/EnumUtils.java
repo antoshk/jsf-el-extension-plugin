@@ -10,6 +10,7 @@ import com.intellij.psi.search.GlobalSearchScope;
 import org.apache.log4j.Logger;
 
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 public class EnumUtils {
@@ -17,6 +18,25 @@ public class EnumUtils {
     private static final Logger log = Logger.getLogger(EnumUtils.class);
     
     public static Stream<PsiEnumConstant> extractEnumConstants(String classFullName, Project project) {
+        Optional<PsiClass> classWrap = getDecompiledPsiClass(classFullName, project);
+        if (classWrap.isPresent()) {
+            PsiClass cl = classWrap.get();
+            return Stream.of(cl.getFields()).filter(f -> f instanceof PsiEnumConstant).map(f -> (PsiEnumConstant) f);
+        }
+        
+        return Stream.empty();
+    }
+    
+    public static Stream<PsiField> extractEnumConstFields(String classFullName, Project project) {
+        Optional<PsiClass> classWrap = getDecompiledPsiClass(classFullName, project);
+        if (classWrap.isPresent()) {
+            PsiClass cl = classWrap.get();
+            return Stream.of(cl.getAllFields()).filter(f -> !(f instanceof PsiEnumConstant));
+        }
+        return Stream.empty();
+    }
+    
+    private static Optional<PsiClass> getDecompiledPsiClass(String classFullName, Project project) {
         if (classFullName != null && classFullName.length() > 0) {
             GlobalSearchScope scope = GlobalSearchScope.allScope(project);
             PsiClass cl = JavaPsiFacade.getInstance(project).findClass(classFullName, scope);
@@ -24,10 +44,10 @@ public class EnumUtils {
                 if (cl instanceof PsiCompiledElement) {
                     cl = (PsiClass) ((PsiCompiledElement) cl).getMirror(); // triggers decompilation
                 }
-                return Stream.of(cl.getFields()).filter(f -> f instanceof PsiEnumConstant).map(f -> (PsiEnumConstant) f);
+                return Optional.ofNullable(cl);
             }
         }
-        return Stream.empty();
+        return Optional.empty();
     }
     
     public static PsiClass findEnum(String enumName, Project project) {
