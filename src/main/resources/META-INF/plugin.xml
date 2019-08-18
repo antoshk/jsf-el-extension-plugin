@@ -30,7 +30,7 @@
     <depends>com.intellij.modules.ultimate</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <psi.referenceContributor implementation="com.antoshk.psi.EnumReferenceContributor"/>
+        <psi.referenceContributor language="EL" implementation="com.antoshk.psi.EnumReferenceContributor" order="first"/>
         <completion.contributor language="EL" implementationClass="com.antoshk.ElCompletionContributor" order="first"/>
         <annotator language="EL" implementationClass="com.antoshk.EnumAnnotator" order="last"/>
     </extensions>

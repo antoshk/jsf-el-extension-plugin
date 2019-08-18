@@ -22,7 +22,18 @@ public class ElCompletionContributor extends CompletionContributor {
         String actual = getActualInput(text, caretPosition);
         Map<ELUtils.Parts, String> enumNameParts = ELUtils.processElTree(parameters.getPosition(), actual);
         
-        if (enumNameParts.get(ELUtils.Parts.ENUM_NAME) != null && enumNameParts.get(ELUtils.Parts.CONST_NAME) != null) {
+        if (enumNameParts.size() == 3) {
+            String className = EnumUtils.getEnumFullClassName(enumNameParts.get(ELUtils.Parts.ENUM_NAME), project);
+            if (className != null) {
+                EnumUtils.extractEnumConstFields(className, project)
+                    .filter(enumField -> enumField.getName().startsWith(actual))
+                    .forEach(enumConst -> {
+                        LookupElementBuilder builder = LookupElementBuilder.create(enumConst.getName());
+                        result.withPrefixMatcher(actual).addElement(builder);
+                    });
+                result.stopHere();
+            }
+        } else if (enumNameParts.size() == 2) {
             String className = EnumUtils.getEnumFullClassName(enumNameParts.get(ELUtils.Parts.ENUM_NAME), project);
             if (className != null) {
                 EnumUtils.extractEnumConstants(className, project)
@@ -35,6 +46,7 @@ public class ElCompletionContributor extends CompletionContributor {
                         }
                         result.withPrefixMatcher(actual).addElement(builder);
                     });
+                result.stopHere();
             }
         } else if (enumNameParts.get(ELUtils.Parts.ENUM_NAME) != null) {
             Map<String, String> enums = PropertyParser.collectProperties(Utils.ENUM_PROPERTY_FILENAME, project, false);
