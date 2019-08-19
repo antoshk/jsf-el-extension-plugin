@@ -24,7 +24,7 @@
     ]]>
     </change-notes>
 
-    <idea-version since-build="192"/>
+    <idea-version since-build="191"/>
 
     <depends>com.intellij.modules.java</depends>
     <depends>com.intellij.properties</depends>
